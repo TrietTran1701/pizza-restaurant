@@ -60,8 +60,8 @@ const Header = () => {
     >
       <nav className="relative container mx-auto flex items-center justify-between py-4 px-2">
         <div className="">
-          <h4 className="text-xl font-semibold">ThePizzaCompany</h4>
-          <span className="text-[0.65rem] font-bold opacity-70">
+          <h1 className="text-xl md:text-2xl font-semibold">ThePizzaCompany</h1>
+          <span className="text-[0.65rem] md:text-[0.85rem] font-bold opacity-70">
             Tasty pizza
           </span>
         </div>

@@ -1,9 +1,10 @@
-import Header from "../components/common/Header"
-
+import Header from "../components/homepage/Header"
+import Home from "../components/homepage/Hero"
 const Homepage = () => {
   return (
-    <div>
+    <div className="bg-back">
       <Header />
+      <Home />
     </div>
   )
 }
