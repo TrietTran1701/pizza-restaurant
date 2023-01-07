@@ -1,5 +1,6 @@
 import React from "react"
-import hero from "../../assets/Hero.gif"
+// import hero from "../../assets/herobg.gif"
+import Hero from "../../assets/Hero.gif"
 import { FaArrowRight } from "react-icons/fa"
 import { heroIcons } from "../../Icons"
 
@@ -31,7 +32,7 @@ const Home = () => {
         </div>
       </div>
       <div className="min-w-[200px] justify-self-center md:w-[600px]">
-        <img src={hero} alt="hero" />
+        <img src={Hero} alt="hero" />
       </div>
     </div>
   )

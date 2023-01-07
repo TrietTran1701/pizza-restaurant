@@ -17,14 +17,14 @@ const About = () => {
             aliquam facere exercitationem? Accusamus inventore possimus quasi
             labore, laudantium earum corporis.
           </p>
-          <div className="btn">
-            <a href="" className="text-white text-[0.85rem]">
+          <div className="btn mb-5">
+            <a href="#" className="text-white text-[0.85rem]">
               Explore more
             </a>
             <FaArrowRight className="text-white" />
           </div>
         </div>
-        <div className="md:row-start-1">
+        <div className="md:row-start-1 ">
           <img src={pizza} alt="" />
         </div>
       </div>
