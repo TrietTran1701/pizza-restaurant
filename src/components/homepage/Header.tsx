@@ -3,6 +3,11 @@ import { AiOutlineShoppingCart } from "react-icons/ai"
 import { IoIosArrowDown } from "react-icons/io"
 import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react"
 
+interface IPropsHeader {
+  language: string
+  setLanguage: (language: string) => any
+}
+
 interface IPropsLanguaeSwitcher {
   language: string
   setLanguage: (language: string) => any
@@ -43,15 +48,20 @@ export const LanguageSwitcher = ({
     </Menu>
   )
 }
-const Header = () => {
+const Header = ({ language, setLanguage }: IPropsHeader) => {
   const [scroll, setScroll] = useState(false)
-  const [language, setLanguage] = useState("English")
+  // const [language, setLanguage] = useState("English")
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setScroll(window.scrollY > 20)
     })
   }, [])
+  // useEffect(() => {
+  //   if (language === "English") localStorage.setItem("locale", "en")
+  //   else if (language === "Tiếng Việt") localStorage.setItem("locale", "vie")
+  //   else localStorage.setItem("locale", "ja")
+  // }, [language])
   return (
     <div
       className={`${

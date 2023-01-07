@@ -1,17 +1,19 @@
 import Header from "../components/homepage/Header"
-import Home from "../components/homepage/Hero"
+import Hero from "../components/homepage/Hero"
 import About from "../components/homepage/About"
 import Menu from "../components/homepage/Menu"
-import { PizzaType } from "../types"
+import { PizzaCombineType } from "../types"
 import { useState, useEffect } from "react"
 import axios from "axios"
 
 const Homepage = () => {
-  const [pizzas, setPizzas] = useState<PizzaType[]>([])
+  const [pizzas, setPizzas] = useState<PizzaCombineType>()
+  const [locale, setLocale] = useState("en")
+  const [language, setLanguage] = useState("English")
   const fetchPizzas = async () => {
     try {
       const response = await axios.get(
-        "https://mocki.io/v1/6d645357-0a93-462a-a6e1-b4c370551dfe"
+        "https://mocki.io/v1/39d3eb96-70c1-4f5f-bbbd-810025bb958c"
       )
       if (response) {
         setPizzas(response.data)
@@ -24,12 +26,18 @@ const Homepage = () => {
     fetchPizzas()
   }, [])
 
+  useEffect(() => {
+    if (language === "English") setLocale("en")
+    else if (language === "Tiếng Việt") setLocale("vie")
+    else setLocale("ja")
+  }, [language])
+
   return (
     <div className="bg-back">
-      <Header />
-      <Home />
-      <About />
-      <Menu pizzas={pizzas} />
+      <Header language={language} setLanguage={setLanguage} />
+      <Hero locale={locale} />
+      <About locale={locale} />
+      <Menu pizzas={pizzas} locale={locale} />
     </div>
   )
 }

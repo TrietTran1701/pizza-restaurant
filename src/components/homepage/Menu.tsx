@@ -1,12 +1,32 @@
-import { PizzaType } from "../../types"
+import { PizzaSingleType, PizzaCombineType } from "../../types"
+import { useState } from "react"
+const message: any = {
+  en: {
+    title: "Hot selling pizzas",
+    btn: "Add to cart",
+  },
+  vie: {
+    title: "Pizza bán chạy",
+    btn: "Thêm vào giỏ",
+  },
+  ja: {
+    title: "売れ筋ピザ",
+    btn: "カートに追加",
+  },
+}
+interface IPropsPizza {
+  locale: string
+}
 
 interface IPropsMenuItem {
-  pizza: PizzaType
+  pizza: PizzaSingleType
+  locale: string
 }
 interface IPropsMenu {
-  pizzas: PizzaType[]
+  pizzas: PizzaCombineType | undefined
+  locale: string
 }
-export const MenuItem = ({ pizza }: IPropsMenuItem) => {
+export const MenuItem = ({ pizza, locale }: IPropsMenuItem) => {
   return (
     <div className=" p-4 shadow-lg hover:shadow transition-all duration-300 cursor-pointer">
       <img src={pizza.img} alt="" className="rounded-lg mb-4" />
@@ -21,24 +41,29 @@ export const MenuItem = ({ pizza }: IPropsMenuItem) => {
       <p className="text-[0.85rem] opacity-70 mb-4">{pizza.desc}</p>
       <div className="flex items-center justify-between">
         <span className="text-xl font-semibold">{pizza.price}$</span>
-        <span className="cursor-pointer p-3 btn">Add to Cart</span>
+        <span className="cursor-pointer p-3 btn">
+          {message && message[locale].btn}
+        </span>
       </div>
     </div>
   )
 }
 
-const Menu = ({ pizzas }: IPropsMenu) => {
-  //   console.log(pizzas.length)
+const Menu = ({ pizzas, locale }: IPropsMenu) => {
+  // console.log(pizzas['en'])
+  //   const [menu, setMenu] = useState < PizzaSingle
+  const temp: any = locale
   return (
     <div className="section" id="recipe">
       <div className="flex flex-col items-center">
         <div className="text-3xl text-center font-bold mb-16">
-          Hot selling Recipe
+          {/* Hot selling Recipe */}
+          {message && message[locale].title}
         </div>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8 mb-16">
-          {pizzas.length > 0 &&
-            pizzas.map((pizza, index) => (
-              <MenuItem pizza={pizza} key={index} />
+          {pizzas &&
+            pizzas[locale].map((pizza, index) => (
+              <MenuItem pizza={pizza} key={index} locale={locale} />
             ))}
         </div>
       </div>

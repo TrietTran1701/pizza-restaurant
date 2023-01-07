@@ -1,10 +1,30 @@
-import React from "react"
-// import hero from "../../assets/herobg.gif"
 import Hero from "../../assets/Hero.gif"
 import { FaArrowRight } from "react-icons/fa"
 import { heroIcons } from "../../Icons"
 
-const Home = () => {
+const message: any = {
+  en: {
+    title: "Delicious pizza",
+    subtitle: "is waiting for you",
+    btn: "View Menu",
+  },
+  vie: {
+    title: "Pizza nóng hổi",
+    subtitle: "đang chờ bạn đấy",
+    btn: "Xem Menu",
+  },
+  ja: {
+    title: "おいしいピザ",
+    subtitle: "があなたを待っています",
+    btn: "メニューを見る",
+  },
+}
+
+interface IPropsHero {
+  locale: string
+}
+const Home = ({ locale }: IPropsHero) => {
+  // console.log(locale)
   return (
     <div
       className="section flex items-center xl:justify-center justify-around flex-wrap"
@@ -12,10 +32,11 @@ const Home = () => {
     >
       <div className="flex flex-col items-start gap-10">
         <div className="sm:text-[2.5rem] text-[1.8rem] font-bold">
-          Delicious <br /> Pizza is waiting <br /> For you
+          {/* Delicious <br /> Pizza is waiting <br /> For you */}
+          {message && message[locale].title} <br /> {message[locale].subtitle}
         </div>
         <div className="btn">
-          <a href="#">View Menu</a>
+          <a href="#">{message && message[locale].btn}</a>
           <FaArrowRight />
         </div>
         <div className="flex md:gap-6 gap-2">
