@@ -1,6 +1,9 @@
 import Hero from "../../assets/Hero.gif"
 import { FaArrowRight } from "react-icons/fa"
 import { heroIcons } from "../../Icons"
+import { useAnimation, motion } from "framer-motion"
+import { useEffect } from "react"
+import { useInView } from "react-intersection-observer"
 
 const message: any = {
   en: {
@@ -24,7 +27,29 @@ interface IPropsHero {
   locale: string
 }
 const Home = ({ locale }: IPropsHero) => {
-  // console.log(locale)
+  const [ref, inView] = useInView()
+  const fadeInUp = useAnimation()
+  let easing = [0.6, -0.05, 0.01, 0.99]
+  useEffect(() => {
+    // console.log("in view: ", inView)
+    if (inView) {
+      fadeInUp.start({
+        y: 0,
+        opacity: 1,
+        transition: {
+          duration: 0.6,
+          ease: easing,
+        },
+      })
+    }
+    if (!inView) {
+      fadeInUp.start({
+        y: 60,
+        opacity: 0,
+        transition: { duration: 0.6, ease: easing },
+      })
+    }
+  }, [inView])
   return (
     <div
       className="section flex items-center xl:justify-center justify-around flex-wrap"

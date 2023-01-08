@@ -8,7 +8,7 @@ import { AnimatePresence } from "framer-motion"
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ChakraProvider>
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         <Router>
           <App />
         </Router>

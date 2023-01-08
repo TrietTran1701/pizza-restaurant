@@ -1,8 +1,8 @@
 import { FaArrowRight } from "react-icons/fa"
-import React from "react"
-import chef from "../../assets/chef.jpeg"
 import pizza from "../../assets/pizza1.png"
-
+import { useAnimation, motion } from "framer-motion"
+import { useEffect } from "react"
+import { useInView } from "react-intersection-observer"
 const message: any = {
   en: {
     title: "Delicious pizza awaits you",
@@ -25,10 +25,37 @@ interface IPropsAbout {
   locale: string
 }
 const About = ({ locale }: IPropsAbout) => {
+  const [ref, inView] = useInView()
+  const fadeInUp = useAnimation()
+  let easing = [0.6, -0.05, 0.01, 0.99]
+  useEffect(() => {
+    // console.log("in view: ", inView)
+    if (inView) {
+      fadeInUp.start({
+        y: 0,
+        opacity: 1,
+        transition: {
+          duration: 0.6,
+          ease: easing,
+        },
+      })
+    }
+    if (!inView) {
+      fadeInUp.start({
+        y: 60,
+        opacity: 0,
+        transition: { duration: 0.6, ease: easing },
+      })
+    }
+  }, [inView])
   return (
     <div className="section" id="about">
       <div className="grid md:grid-cols-2 items-center mb-10">
-        <div className="flex flex-col justify-center items-start gap-6">
+        <motion.div
+          ref={ref}
+          animate={fadeInUp}
+          className="flex flex-col justify-center items-start gap-6"
+        >
           <div className="sm:text-3xl text-xl font-bold mb-6">
             {message && message[locale].title}
           </div>
@@ -39,7 +66,7 @@ const About = ({ locale }: IPropsAbout) => {
             </a>
             <FaArrowRight className="text-white" />
           </div>
-        </div>
+        </motion.div>
         <div className="md:row-start-1 ">
           <img src={pizza} alt="" />
         </div>
